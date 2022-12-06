@@ -1,9 +1,19 @@
 import {Link} from "react-router-dom";
+import React from "react";
 
 function MyCart(){
     const hideMyCart = () => {
         var modal = document.getElementById("modalMyCart");
         modal.style.display = "none";
+    }
+    const [data, setData] = React.useState(null);
+    React.useEffect(() => {
+        fetch("http://localhost:3001/getAuth")
+          .then((res) => res.json())
+          .then((data) => setData(data));
+      }, []);
+    if (data){
+        console.log(data)
     }
     return (
         <div className="modal">

@@ -1,6 +1,15 @@
 import {Link} from "react-router-dom";
- 
+import Products from "../../Components/Products";
+import React from "react";
+
 function Categories(){
+    const [data, setData] = React.useState(null);
+    React.useEffect(() => {
+        fetch("http://localhost:3001/api/products")
+          .then((res) => res.json())
+          .then((data) => setData(data));
+      }, []);
+
     return (
         <div className="categories">
             <section className="page">
@@ -16,48 +25,15 @@ function Categories(){
                         </form>
                     </div>
                     <div className="for-sale default-padding padding-menu">
-                        <div className="for-sale-product">
-                            <div className="for-sale-image" style={{'backgroundImage': 'url("https://superbdemo.com/themes/superb-ecommerce/wp-content/uploads/2022/07/wc-11-300x300.png")', 'backgroundRepeat': 'no-repeat', 'backgroundSize': 'cover',}}><Link to="/product?id=1"></Link></div>
-                            <div className="for-sale-text">
-                                <div className="for-sale-title">Just a chair</div>
-                                <div className="for-sale-price">R$ 50,00</div>
-                            </div>
-                        </div>
-                        <div className="for-sale-product">
-                            <div className="for-sale-image" style={{'backgroundImage': 'url("https://superbdemo.com/themes/superb-ecommerce/wp-content/uploads/2022/07/wc-img-1-300x300.png")', 'backgroundRepeat': 'no-repeat', 'backgroundSize': 'cover',}}><Link to="/product?id=1"></Link></div>
-                            <div className="for-sale-text">
-                                <div className="for-sale-title">Just a chair</div>
-                                <div className="for-sale-price">R$ 50,00</div>
-                            </div>
-                        </div>
-                        <div className="for-sale-product">
-                            <div className="for-sale-image" style={{'backgroundImage': 'url("https://superbdemo.com/themes/superb-ecommerce/wp-content/uploads/2022/07/wc-12-300x300.png")', 'backgroundRepeat': 'no-repeat', 'backgroundSize': 'cover',}}><Link to="/product?id=1"></Link></div>
-                            <div className="for-sale-text">
-                                <div className="for-sale-title">Just a chair</div>
-                                <div className="for-sale-price">R$ 50,00</div>
-                            </div>
-                        </div>
-                        <div className="for-sale-product">
-                            <div className="for-sale-image" style={{'backgroundImage': 'url("https://superbdemo.com/themes/superb-ecommerce/wp-content/uploads/2022/07/wc-15-300x300.png")', 'backgroundRepeat': 'no-repeat', 'backgroundSize': 'cover',}}><Link to="/product?id=1"></Link></div>
-                            <div className="for-sale-text">
-                                <div className="for-sale-title">Just a chair</div>
-                                <div className="for-sale-price">R$ 50,00</div>
-                            </div>
-                        </div>
-                        <div className="for-sale-product">
-                            <div className="for-sale-image" style={{'backgroundImage': 'url("https://superbdemo.com/themes/superb-ecommerce/wp-content/uploads/2022/07/wc-16-300x300.png")', 'backgroundRepeat': 'no-repeat', 'backgroundSize': 'cover',}}><Link to="/product?id=1"></Link></div>
-                            <div className="for-sale-text">
-                                <div className="for-sale-title">Just a chair</div>
-                                <div className="for-sale-price">R$ 50,00</div>
-                            </div>
-                        </div>
-                        <div className="for-sale-product">
-                            <div className="for-sale-image" style={{'backgroundImage': 'url("https://superbdemo.com/themes/superb-ecommerce/wp-content/uploads/2022/07/wc-18-300x300.png")', 'backgroundRepeat': 'no-repeat', 'backgroundSize': 'cover',}}><Link to="/product?id=1"></Link></div>
-                            <div className="for-sale-text">
-                                <div className="for-sale-title">Just a chair</div>
-                                <div className="for-sale-price">R$ 50,00</div>
-                            </div>
-                        </div>
+                        {
+                            !data ? "Loading..." : 
+
+                            Object.keys(data).map((e) => {
+                                return (<Products key={e} name={data[e].name} price={data[e].price} image={data[e].image} id={data[e].id}/>)
+                            })
+                            
+                        }
+
                     </div>       
                     <div className="pagination pl-25 pr-25">
                         <ul className="pagination-numbers">
