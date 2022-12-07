@@ -12,35 +12,31 @@ var con = mysql.createConnection({
 
 exports.authentication = (request,response) => {
     // Capture the input fields
-	console.log(request.email, request.password)
-	let username = request.email;
-	let password = request.password;
+	let username = request.body.name;
+	let password = request.body.password;
 	// Ensure the input fields exists and are not empty
 	if (username && password) {
 		// Execute SQL query that'll select the account from the database based on the specified username and password
 		con.query('SELECT * FROM couch_store.users WHERE name = ? AND password = ?', [username, password], function(error, results, fields) {
-			// If there is an issue with the query, output the error
 			if (error) throw error;
 			// If the account exists
 			if (results.length > 0) {
-				// Authenticate the user
-				request.session.loggedIn = true;
-				request.session.username = username;
-				// Redirect to home page
-				response.redirect('http://localhost:3000/home');
+				response.json({message: "success", userId: results[0].id, userName: results[0].name});
 			} else {
-				response.send('Incorrect Username and/or Password!');
+				response.status(401).json({error: 'Incorrect Username and/or Password!'});
 			}			
 			response.end();
 		});
 	} else {
-		response.send('Please enter Username and Password!');
+		response.status(401).json({error: 'Please enter Username and Password!'});
 		response.end();
 	}
 }
-exports.getAuth = (req,res) => {
-    if (session.loggedIn != undefined) {
-        res.json({loggedIn: true, name:req.session.name})
-    }
-    res.json({loggedIn: false})
+
+exports.getProducts = (req, res) => {
+
+	con.query('SELECT * FROM couch_store.user_products WHERE user_id = ? AND on_cart = 1', [req.query.user_id], function(error, results, fields) {
+		if (error) throw error;
+		res.json(results)
+	});
 }

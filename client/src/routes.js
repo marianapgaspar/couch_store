@@ -17,6 +17,7 @@ function RoutesApp(){
                         <HomeHeader/>
                         <Home/>
                         <Footer/>
+                        <MyCart/>
                     </>
                 }/>
                 <Route path="/categories" element={
@@ -24,12 +25,12 @@ function RoutesApp(){
                         <Header/>
                         <Categories/>
                         <Footer/>
+                        <MyCart/>
                     </>
                 }/>
                 <Route path="/sign-up" element={<Signup/>}/>
                 <Route path="/login" element={<Login/>}/>
             </Routes>
-            <MyCart/>
         </BrowserRouter>
        
     )

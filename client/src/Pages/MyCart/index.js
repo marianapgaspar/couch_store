@@ -1,19 +1,11 @@
 import {Link} from "react-router-dom";
 import React from "react";
+import MyCartComponent from "../../Components/MyCartComponent";
 
 function MyCart(){
     const hideMyCart = () => {
         var modal = document.getElementById("modalMyCart");
         modal.style.display = "none";
-    }
-    const [data, setData] = React.useState(null);
-    React.useEffect(() => {
-        fetch("http://localhost:3001/getAuth")
-          .then((res) => res.json())
-          .then((data) => setData(data));
-      }, []);
-    if (data){
-        console.log(data)
     }
     return (
         <div className="modal">
@@ -27,47 +19,7 @@ function MyCart(){
                         <div className="modal-header-close"><Link component="button" onClick={hideMyCart}><i className="fa fa-times"></i></Link></div>
                     </div>
                     <div className="modal-body">
-                        <div className="cart-products">
-                            <div className="cart-product">
-                                <div className="cart-product-image" style={{"backgroundImage": "url('https://superbdemo.com/themes/superb-ecommerce/wp-content/uploads/2022/07/wc-11-300x300.png')", "backgroundRepeat": "no-repeat", "backgroundSize": "cover"}}><Link component="button"></Link></div>
-                                <div className="cart-product-text">
-                                    <div className="cart-product-text-title">Monarquy Chair</div>
-                                    <div className="cart-product-text-description">Is not just a chair</div>
-                                </div>
-                                <div className="cart-product-price">
-                                    <div className="cart-product-price-total">
-                                        $ 500,00
-                                    </div>  
-                                    <div className="cart-remove-all"><Link component="button"><u>Remove</u></Link></div>
-                                </div>
-                            </div>
-                            <div className="cart-product">
-                                <div className="cart-product-image" style={{"backgroundImage": "url('https://superbdemo.com/themes/superb-ecommerce/wp-content/uploads/2022/07/wc-11-300x300.png')", "backgroundRepeat": "no-repeat", "backgroundSize": "cover"}}><Link component="button"></Link></div>
-                                <div className="cart-product-text">
-                                    <div className="cart-product-text-title">Chair</div>
-                                    <div className="cart-product-text-description">Is not just a chair</div>
-                                </div>
-                                <div className="cart-product-price">
-                                    <div className="cart-product-price-total">
-                                        $ 500,00
-                                    </div>  
-                                    <div className="cart-remove-all"><Link component="button"><u>Remove</u></Link></div>
-                                </div>
-                            </div>
-                            <div className="cart-product">
-                                <div className="cart-product-image" style={{"backgroundImage": "url('https://superbdemo.com/themes/superb-ecommerce/wp-content/uploads/2022/07/wc-11-300x300.png')", "backgroundRepeat": "no-repeat", "backgroundSize": "cover"}}><Link component="button"></Link></div>
-                                <div className="cart-product-text">
-                                    <div className="cart-product-text-title">Chair</div>
-                                    <div className="cart-product-text-description">Is not just a chair</div>
-                                </div>
-                                <div className="cart-product-price">
-                                    <div className="cart-product-price-total">
-                                        $ 500,00
-                                    </div>  
-                                    <div className="cart-remove-all"><Link component="button"><u>Remove</u></Link></div>
-                                </div>
-                            </div>
-                        </div>
+                        <MyCartComponent/>
                     </div>
                     <div className="modal-footer">
                         <div className="cart-footer">
@@ -81,11 +33,12 @@ function MyCart(){
                                     </div>
                                 </div>
                                 <div className="cart-total">R$ 6,00</div>
+                                <div className="cart-buttons">
+                                    <button className="btn-outline-danger" onClick={hideMyCart}>Cancel</button>
+                                    <button className="btn-outline-success">Continue</button>
+                                </div>
                             </div>
-                            <div className="cart-buttons">
-                                <button className="btn-outline-danger" onClick={hideMyCart}>Cancel</button>
-                                <button className="btn-outline-success">Continue</button>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>

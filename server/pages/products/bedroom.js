@@ -18,3 +18,14 @@ exports.products = (req,res) => {
             res.json(result)
         });
 }
+exports.getById = (req,res) => {
+    con.connect(function(err) {
+        if (err) {
+            throw err;
+        }
+    });
+    con.query("SELECT * FROM couch_store.products  WHERE id = ? ", [req.query.product_id], function (err, result, fields) {
+        if (err) throw err;
+        res.json(result)
+    });
+}
