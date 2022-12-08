@@ -24,7 +24,7 @@ exports.getById = (req,res) => {
             throw err;
         }
     });
-    con.query("SELECT * FROM couch_store.products  WHERE id = ? ", [req.query.product_id], function (err, result, fields) {
+    con.query("SELECT * FROM couch_store.products  WHERE id = ? ", [req.query.id], function (err, result, fields) {
         if (err) throw err;
         res.json(result)
     });

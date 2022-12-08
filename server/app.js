@@ -9,6 +9,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 app.use(cors())
+app.use(bodyParser.urlencoded({extended : false}));
 app.use(bodyParser.json());
 app.use("/api", api)
 app.use("/", route)
@@ -19,4 +20,5 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: true }
 }))
+
 app.listen(process.env.PORT) 

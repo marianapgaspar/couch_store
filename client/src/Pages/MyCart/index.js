@@ -7,8 +7,12 @@ function MyCart(){
         var modal = document.getElementById("modalMyCart");
         modal.style.display = "none";
     }
+    const showPaymentForm = () => {
+        var modal = document.getElementById("modalPaymentForm");
+        modal.style.display = "block";
+    }
     return (
-        <div className="modal">
+        <div className="modal ">
             <div className="modal-content">
                 <div className="modal-display" style={{display: "none"}} id="modalMyCart">
                     <div className="modal-header">
@@ -35,7 +39,7 @@ function MyCart(){
                                 <div className="cart-total">R$ 6,00</div>
                                 <div className="cart-buttons">
                                     <button className="btn-outline-danger" onClick={hideMyCart}>Cancel</button>
-                                    <button className="btn-outline-success">Continue</button>
+                                    <button className="btn-outline-success" onClick={showPaymentForm}>Continue</button>
                                 </div>
                             </div>
                            
