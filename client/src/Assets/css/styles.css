@@ -650,7 +650,6 @@ ul {
     display: grid;
     grid-template-columns: 30% 40% 30%;
     align-items: center;
-    padding-left: 2em;
 }
 .cart-product-image{
     height: 5em;
@@ -682,7 +681,6 @@ ul {
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
-    padding-right: 5em;
     row-gap: 1em;
 }
 .cart-total{
@@ -691,6 +689,8 @@ ul {
 }
 .cart-buttons{
     color: red;
+    display: flex;
+    column-gap: 0.5em
 }
 .cart-text{
     display: flex;
@@ -707,4 +707,20 @@ ul {
 }
 .cart-subtext-quantity{
     color:#7b7b7b;
+}
+.message-success {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 0.5rem;
+}
+.message-title {
+    font-size: 2em;
+}
+.message-description {
+    font-size: 1em;
+    max-width: 25em;
+    text-align: center;
+    color: #7c7a7a;
 }

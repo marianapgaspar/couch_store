@@ -5,6 +5,8 @@ import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
 import MyCart from "./Pages/MyCart";
 import PaymentForm from "./Pages/PaymentForm";
+
+import SuccessPayment from "./Components/SuccessPayment";
 import Header from "./Components/Header";
 import HomeHeader from "./Components/HomeHeader";
 import Footer from "./Components/Footer";
@@ -18,6 +20,16 @@ function RoutesApp(){
                         <Home/>
                         <Footer/>
                         <MyCart/>
+                        <PaymentForm/>
+                    </>
+                }/>
+                <Route path="/success-payment" element={
+                    <>
+                        <HomeHeader/>
+                        <Home/>
+                        <Footer/>
+                        <MyCart/>
+                        <SuccessPayment/>
                         <PaymentForm/>
                     </>
                 }/>

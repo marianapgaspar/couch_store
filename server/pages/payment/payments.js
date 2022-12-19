@@ -1,35 +1,36 @@
-const mercadopago = require('mercadopago');
 const dotenv = require("dotenv");
 dotenv.config();
-var oldAccessToken = mercadopago.configurations.getAccessToken();
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+const stripePublicKey = process.env.STRIPE_PUBLIC_KEY;
+const stripe = require("stripe")(stripeSecretKey);
 
-exports.checkout = function (req, res) {
-
-    var payment = {
-        description: 'Buying a PS4',
-        transaction_amount: 10500,
-        payment_method_id: 'rapipago',
-        payer: {
-            email: 'test_user_3931694@testuser.com',
-            identification: {
-            type: 'DNI',
-            number: '34123123'
-            }
-        }
-        };
-    
-        // Set the access_token credentials for testing
-        mercadopago.configurations.setAccessToken(process.env.MP_ACCESS_TOKEN);
-    
-        mercadopago.payment.create(payment).then(function (data) {
-        res.render('jsonOutput', {
-            result: data
-        });
-        }).catch(function (error) {
-        res.render('500', {
-            error: error
-        });
-        }).finally(function() {
-        mercadopago.configurations.setAccessToken(oldAccessToken);
-        });
+    const storeItems = new Map([
+        [1, {price: 1000, name: "First product"}],
+        [2, {price: 2000, name: "Second product"}],
+    ])
+exports.checkout = async function (req, res) {
+    try {
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ["card"],
+            mode: "payment",
+            line_items: req.body.items.map(item => {
+              const storeItem = storeItems.get(item.id)
+              return {
+                price_data: {
+                  currency: "usd",
+                  product_data: {
+                    name: storeItem.name,
+                  },
+                  unit_amount: storeItem.price,
+                },
+                quantity: item.quantity,
+              }
+            }),
+            success_url: "http://localhost:3000/payment-sucess",
+            cancel_url: "http://localhost:3000/",
+        })
+        res.json({ url: session.url })
+    } catch (e){
+        res.status(500).json({error: e.message})
+    }
 }

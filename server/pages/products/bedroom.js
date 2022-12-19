@@ -29,3 +29,14 @@ exports.getById = (req,res) => {
         res.json(result)
     });
 }
+exports.getTotalById = (req,res) => {
+    con.connect(function(err) {
+        if (err) {
+            throw err;
+        }
+    });
+    con.query("SELECT count(*) AS total, sum(price) AS price FROM couch_store.user_products INNER JOIN (SELECT id AS id_join, price FROM couch_store.products) myAlias ON id_join = user_products.product_id WHERE user_id = ? ", [req.query.id], function (err, result, fields) {
+        if (err) throw err;
+        res.json(result)
+    });
+}

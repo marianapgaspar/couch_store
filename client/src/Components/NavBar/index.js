@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 function NavBar(){
     const showMyCart = () => {
         var modal = document.getElementById("modalMyCart");
-        modal.style.display = "block";
+        modal.style.display = "flex";
     }
     return (
         <div>
@@ -35,7 +35,7 @@ function NavBar(){
                     </ul>
                 </li>
                 <li className="header-item">
-                    <Link to="/sign-up">Sign-up</Link>
+                    <Link to="/login">Login</Link>
                 </li>
                 <li className="header-item">
                     <Link component="button" onClick={showMyCart}>My Cart</Link>

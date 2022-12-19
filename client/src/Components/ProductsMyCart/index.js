@@ -1,12 +1,10 @@
 import {Link} from "react-router-dom";
 import React from "react";
-
 function ProductsMyCart(props) {
     const [data, setData] = React.useState(null);
     const [loaded, setLoad] = React.useState(false);
 
     if (!loaded){
-
         fetch("http://localhost:3001/api/get-product?id="+props.product_id, {
           method: "GET"
         }).then((response) =>{

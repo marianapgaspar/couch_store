@@ -8,13 +8,16 @@ function Home(){
           .then((res) => res.json())
           .then((data) => setData(data));
       }, []);
+
+    const productsRef = React.useRef(null)
+    const executeScroll = () => productsRef.current.scrollIntoView({ behavior: 'smooth' })    
     return (
         <div className="home">
             <div className="hero-image">
                 <div className="hero" >
                     <div className="hero-content">
                         <div className="hero-subject">We have the highest quality furniture</div>
-                        <div className="hero-buttons"><button className="btn-warning">SHOP NOW</button><button className="btn-outline-secondary">BEST PRICES</button></div>
+                        <div className="hero-buttons"><button className="btn-warning">SHOP NOW</button><button className="btn-outline-secondary" onClick={executeScroll}>BEST PRICES</button></div>
                     </div>
                 </div>
             </div>       
@@ -68,7 +71,7 @@ function Home(){
                     </div>           
                 </div>
                     
-                <div className="for-sale default-padding mt-3 mb-3">
+                <div className="for-sale default-padding mt-3 mb-3" ref={productsRef}> 
                         {
                             !data ? "Loading..." : 
 
