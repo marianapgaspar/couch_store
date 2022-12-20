@@ -5,6 +5,7 @@ import ProductsMyCart from "../../Components/ProductsMyCart";
 export var result = 0;
 export var price = 0;
 export var total = 0;
+export var pInfo = []
 function MyCart(){
     const hideMyCart = () => {
         var modal = document.getElementById("modalMyCart");
@@ -13,6 +14,7 @@ function MyCart(){
     const [data, setData] = React.useState(null);
     const [loaded, setLoad] = React.useState(false);
     const [totalInfo, setInfo] = React.useState(null);
+    const [productsInfo, setProductsInfo] = React.useState(null);
     const userId =  sessionStorage.getItem('id');
 
     const getTotalInfo = () => {
@@ -24,7 +26,29 @@ function MyCart(){
             });
         })
     }
-
+    const getProductsInfo = () => {
+        fetch("http://localhost:3001/api/get-products-info?id="+userId, {
+            method: "GET"
+        }).then((response) =>{
+            response.json().then((data) => {
+                pInfo = [];
+                data.map(item => {
+                    pInfo.push(
+                        {
+                            id: item.id, 
+                            quantity: item.quantity,
+                            price: item.price,
+                            name: item.name
+                        }
+                    )
+                    return pInfo
+                })
+                setProductsInfo({
+                    items: pInfo,
+                });
+            });
+        })
+    }
     if (!loaded){
         price = 0;
         total = 0;
@@ -37,6 +61,7 @@ function MyCart(){
               });
           })
         getTotalInfo()
+        getProductsInfo()
     }
     
     const checkout = () => {
@@ -45,12 +70,7 @@ function MyCart(){
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            items: [
-              { id: 1, quantity: 3 },
-              { id: 2, quantity: 1 },
-            ],
-          }),
+          body: JSON.stringify(productsInfo),
         })
           .then(res => {
             if (res.ok) return res.json()
