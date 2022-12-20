@@ -20,7 +20,6 @@
     "express-route": "^0.1.4",
     "express-session": "^1.17.3",
     "mysql2": "^2.3.3",
-    "nodemon": "^2.0.20",
     "stripe": "^11.4.0",
     "yargs": "^17.6.2"
   }
