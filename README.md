@@ -30,6 +30,7 @@ with some languages like: NodeJS, React, HTML and CSS
 ![home_4](./client/public/img/4.jpeg)
 ![home_5](./client/public/img/5.jpeg)
 ![home_6](./client/public/img/6.jpeg)
+![home_7](./client/public/img/7.jpeg)
 
 ## Setup
 After clone the project, you must create your .env file at server folder. You can follow the .env_example and put your own credentials.
