@@ -5,6 +5,7 @@ with some languages like: NodeJS, React, HTML and CSS
 ## Table of Contents
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
+* [Screenshots](#screenshots)
 * [Setup](#setup)
 
 ## What does the website provide?
@@ -22,6 +23,13 @@ with some languages like: NodeJS, React, HTML and CSS
 - Mysql
 - Stripe API
 
+## Screenshots
+![home](./client/public/img/1.jpeg)
+![home_2](./client/public/img/2.jpeg)
+![home_3](./client/public/img/3.jpeg)
+![home_4](./client/public/img/4.jpeg)
+![home_5](./client/public/img/5.jpeg)
+![home_6](./client/public/img/6.jpeg)
 
 ## Setup
 After clone the project, you must create your .env file at server folder. You can follow the .env_example and put your own credentials.
